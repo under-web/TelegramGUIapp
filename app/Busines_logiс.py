@@ -1,11 +1,12 @@
 # TODO: написать тесты к функциям
-from View.UI_prototype import *
-
 
 
 def see_watcher():
     print('Я смотрю что произошло')
+    pass
 
+def get_authentification():
+    pass
 
 
 def func_1_parsing():

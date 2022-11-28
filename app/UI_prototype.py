@@ -9,12 +9,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from app.Busines_logiс import *
+from Busines_logiс import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(843, 720)
+
+        self.process = QtCore.QProcess()
+        self.process.readyReadStandardOutput.connect(self.stdoutReady)
+        self.process.readyReadStandardError.connect(self.stderrReady)
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.radioButton_parsing = QtWidgets.QRadioButton(self.centralwidget)
@@ -93,12 +98,28 @@ class Ui_MainWindow(object):
         self.pushButton_run.setText(_translate("MainWindow", "Пуск"))
         self.label_telegram_combain.setText(_translate("MainWindow", "TelegramCombain"))
 
-    def on_click_button(self): # нажали Пуск
+    def on_click_button(self):
         print("Мы нажали кнопку")
         if self.radioButton_parsing.isChecked():
             func_1_parsing()
+            self.textEdit.append('Мы нажали кнопку парсинга')
+            self.pushButton_run.setEnabled(False)
         else:
             print('Еще не реализован Radio')
+    def append(self, text):
+        cursor = self.textEdit.textCursor()
+        cursor.movePosition(cursor.End)
+        cursor.insertText(text)
+
+    def stdoutReady(self):
+        text = str(self.process.readAllStandardOutput())
+        print(text.strip())
+        self.append(text)
+
+    def stderrReady(self):
+        text = str(self.process.readAllStandardError())
+        print(text.strip())
+        self.append(text)
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
