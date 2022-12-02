@@ -1,25 +1,13 @@
-# -*- coding: utf-8 -*-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 from Busines_logiс import *
-class Modal(QtWidgets.QWidget):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        # self.setWindowModality(Qt.WindowModal)
-        # self.setModal(True)
-        self.resize(200, 200)
 class Ui_MainWindow(object):
     def __init__(self):
         self.obj_tsm = Tsm()
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(843, 720)
-
-        self.process = QtCore.QProcess()
-        self.process.readyReadStandardOutput.connect(self.stdoutReady)
-        self.process.readyReadStandardError.connect(self.stderrReady)
-
-
+        MainWindow.resize(824, 720)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.radioButton_parsing = QtWidgets.QRadioButton(self.centralwidget)
@@ -68,11 +56,17 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(660, 40, 141, 81))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../../../../Desktop/Снимок.PNG"))
+        self.label.setPixmap(QtGui.QPixmap("../../../Desktop/Снимок.PNG"))
         self.label.setObjectName("label")
+        self.pushButton_run_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_run_2.setGeometry(QtCore.QRect(720, 590, 75, 51))
+        self.pushButton_run_2.setObjectName("pushButton_run_2")
+        self.pushButtonEdit = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonEdit.setGeometry(QtCore.QRect(560, 200, 131, 31))
+        self.pushButtonEdit.setObjectName("pushButtonEdit")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 843, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 824, 21))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -97,11 +91,9 @@ class Ui_MainWindow(object):
         self.radioButton_10_get_phone.setText(_translate("MainWindow", "[9]Извлечь номера телефонов участников групп (из file_channel --> all_user.txt).\'"))
         self.pushButton_run.setText(_translate("MainWindow", "Пуск"))
         self.label_telegram_combain.setText(_translate("MainWindow", "TelegramCombain"))
-
-    def open(self):
-        self.app2 = Modal()
-        self.app2.show()
-    def on_click_button(self):
+        self.pushButton_run_2.setText(_translate("MainWindow", "Стоп"))
+        self.pushButtonEdit.setText(_translate("MainWindow", "Настройки"))
+    def on_click_button_run(self):
         print("Мы нажали кнопку")
         if self.radioButton_parsing.isChecked():
             self.obj_tsm.func_1_parsing()
@@ -111,22 +103,6 @@ class Ui_MainWindow(object):
             self.obj_tsm.func_3_send_mesg()
             self.textEdit.append('Выбрана рассылка')
             self.pushButton_run.setEnabled(False)
-    def append(self, text):
-        cursor = self.textEdit.textCursor()
-        cursor.movePosition(cursor.End)
-        cursor.insertText(text)
-
-    def stdoutReady(self):
-        text = str(self.process.readAllStandardOutput())
-        print(text.strip())
-        self.append(text)
-
-    def stderrReady(self):
-        text = str(self.process.readAllStandardError())
-        print(text.strip())
-        self.append(text)
-
-
 
 if __name__ == "__main__":
     import sys

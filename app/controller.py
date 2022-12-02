@@ -9,9 +9,8 @@ try:
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
 
-    ui.pushButton_run.clicked.connect(ui.on_click_button)
+    ui.pushButton_run.clicked.connect(ui.on_click_button_run)
 
-    # see_watcher()
     MainWindow.show()
     sys.exit(application.exec_())
 except Exception as err:
