@@ -58,9 +58,9 @@ class Ui_MainWindow(object):
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("../../../Desktop/Снимок.PNG"))
         self.label.setObjectName("label")
-        self.pushButton_run_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_run_2.setGeometry(QtCore.QRect(720, 590, 75, 51))
-        self.pushButton_run_2.setObjectName("pushButton_run_2")
+        self.pushButton_stop = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_stop.setGeometry(QtCore.QRect(720, 590, 75, 51))
+        self.pushButton_stop.setObjectName("pushButton_stop")
         self.pushButtonEdit = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonEdit.setGeometry(QtCore.QRect(560, 200, 131, 31))
         self.pushButtonEdit.setObjectName("pushButtonEdit")
@@ -87,11 +87,11 @@ class Ui_MainWindow(object):
         self.radioButton_6_send_file.setText(_translate("MainWindow", "[6] Отправить только  файл  (из папки dir/), пользователям."))
         self.radioButton_7_send_filemes.setText(_translate("MainWindow", "[7] Отправить  файл  (из папки dir/) и текст-сообщение пользователям."))
         self.radioButton_8_parsing_admin.setText(_translate("MainWindow", "[8] Извлечь Администраторов группы (из file_channel --> all_user.txt)."))
-        self.radioButton_9_chek_phone.setText(_translate("MainWindow", "[10] Чекер номеров телефонов на наличие аккаунта телеграм (из phones.txt --> all_user.txt)."))
-        self.radioButton_10_get_phone.setText(_translate("MainWindow", "[9]Извлечь номера телефонов участников групп (из file_channel --> all_user.txt).\'"))
+        self.radioButton_9_chek_phone.setText(_translate("MainWindow", "[9] Чекер номеров телефонов на наличие аккаунта телеграм (из phones.txt --> all_user.txt)."))
+        self.radioButton_10_get_phone.setText(_translate("MainWindow", "[10] Извлечь номера телефонов участников групп (из file_channel --> all_user.txt).\'"))
         self.pushButton_run.setText(_translate("MainWindow", "Пуск"))
         self.label_telegram_combain.setText(_translate("MainWindow", "TelegramCombain"))
-        self.pushButton_run_2.setText(_translate("MainWindow", "Стоп"))
+        self.pushButton_stop.setText(_translate("MainWindow", "Стоп"))
         self.pushButtonEdit.setText(_translate("MainWindow", "Настройки"))
     def on_click_button_run(self):
         print("Мы нажали кнопку")
@@ -99,16 +99,46 @@ class Ui_MainWindow(object):
             self.obj_tsm.func_1_parsing()
             self.textEdit.append('Выбран парсинг')
             self.pushButton_run.setEnabled(False)
+
+        elif self.radioButton_2_pars_sendm.isChecked():
+            self.obj_tsm.func_2_parsing_send()
+            self.textEdit.append('Выбран парсинг и рассылка')
+            self.pushButton_run.setEnabled(False)
+
         elif self.radioButton_3_send_messages.isChecked():
             self.obj_tsm.func_3_send_mesg()
             self.textEdit.append('Выбрана рассылка')
             self.pushButton_run.setEnabled(False)
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+        elif self.radioButton_4_join_group.isChecked():
+            self.obj_tsm.func_4_join_group()
+            self.textEdit.append('Присоединяемся к группам')
+            self.pushButton_run.setEnabled(False)
+
+        elif self.radioButton_5_invite.isChecked():
+            self.obj_tsm.func_5_invite()
+            self.textEdit.append('Инвайт')
+            self.pushButton_run.setEnabled(False)
+
+        elif self.radioButton_6_send_file.isChecked():
+            self.obj_tsm.func_6_send_file()
+            self.textEdit.append('Отправляем файл')
+            self.pushButton_run.setEnabled(False)
+
+        elif self.radioButton_7_send_filemes.isChecked():
+            self.obj_tsm.func_7_send_file_message()
+            self.textEdit.append('Отправка файла + сообщение')
+            self.pushButton_run.setEnabled(False)
+
+        elif self.radioButton_8_parsing_admin.isChecked():
+            self.obj_tsm.func_8_parsing_admin()
+            self.textEdit.append('Парсинг админов')
+            self.pushButton_run.setEnabled(False)
+
+        elif self.radioButton_9_chek_phone.isChecked():
+            self.obj_tsm.func_9_check_phone()
+            self.textEdit.append('Парсинг телефонов участников')
+            self.pushButton_run.setEnabled(False)
+
+    def on_click_button_stop(self):
+        print("Мы нажали стоп")
