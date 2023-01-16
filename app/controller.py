@@ -10,7 +10,7 @@ try:
     ui.setupUi(MainWindow)
 
     ui.pushButton_run.clicked.connect(ui.on_click_button_run)
-    ui.pushButton_stop.clicked.connect(ui.on_click_button_stop)
+    # ui.pushButton_stop.clicked.connect(ui.on_click_button_stop)
 
 
     MainWindow.show()

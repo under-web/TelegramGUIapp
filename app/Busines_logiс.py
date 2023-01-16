@@ -359,5 +359,13 @@ class Tsm(object):
         self._get_parsing_admins()
 
     def func_9_check_phone(self):
-        # self._get_account_phone()
+        self._get_account_phone()
+
+    def func_10_extract_phone_group(self):
+        pass
+    def func_11_get_geolocation_users(self):
         self._get_geolocation()
+
+print('В модуле')
+tsm = Tsm()
+tsm.func_11_get_geolocation_users()

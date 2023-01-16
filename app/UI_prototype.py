@@ -7,7 +7,13 @@ class Ui_MainWindow(object):
         self.obj_tsm = Tsm()
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(824, 720)
+        MainWindow.resize(843, 720)
+
+        # self.process = QtCore.QProcess()
+        # self.process.readyReadStandardOutput.connect(self.stdoutReady)
+        # self.process.readyReadStandardError.connect(self.stderrReady)
+
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.radioButton_parsing = QtWidgets.QRadioButton(self.centralwidget)
@@ -56,19 +62,11 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(660, 40, 141, 81))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../../../Desktop/Снимок.PNG"))
+        self.label.setPixmap(QtGui.QPixmap("../../../../Desktop/Снимок.PNG"))
         self.label.setObjectName("label")
-        self.pushButton_stop = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_stop.setGeometry(QtCore.QRect(720, 590, 75, 51))
-        self.pushButton_stop.setObjectName("pushButton_stop")
-
-        # self.pushButtonEdit = QtWidgets.QPushButton(self.centralwidget)
-        # self.pushButtonEdit.setGeometry(QtCore.QRect(560, 200, 131, 31))
-        # self.pushButtonEdit.setObjectName("pushButtonEdit")
         MainWindow.setCentralWidget(self.centralwidget)
-
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 824, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 843, 21))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -144,7 +142,7 @@ class Ui_MainWindow(object):
 
         elif self.radioButton_10_get_phone.isChecked():
             self.obj_tsm.func_9_check_phone()
-            self.textEdit.append('Геолокация')
+            self.textEdit.append('Г')
             self.pushButton_run.setEnabled(False)
     def on_click_button_stop(self):
         print("Мы нажали стоп")
