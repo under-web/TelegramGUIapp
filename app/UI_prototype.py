@@ -61,10 +61,12 @@ class Ui_MainWindow(object):
         self.pushButton_stop = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_stop.setGeometry(QtCore.QRect(720, 590, 75, 51))
         self.pushButton_stop.setObjectName("pushButton_stop")
-        self.pushButtonEdit = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonEdit.setGeometry(QtCore.QRect(560, 200, 131, 31))
-        self.pushButtonEdit.setObjectName("pushButtonEdit")
+
+        # self.pushButtonEdit = QtWidgets.QPushButton(self.centralwidget)
+        # self.pushButtonEdit.setGeometry(QtCore.QRect(560, 200, 131, 31))
+        # self.pushButtonEdit.setObjectName("pushButtonEdit")
         MainWindow.setCentralWidget(self.centralwidget)
+
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 824, 21))
         self.menubar.setObjectName("menubar")
@@ -92,7 +94,7 @@ class Ui_MainWindow(object):
         self.pushButton_run.setText(_translate("MainWindow", "Пуск"))
         self.label_telegram_combain.setText(_translate("MainWindow", "TelegramCombain"))
         self.pushButton_stop.setText(_translate("MainWindow", "Стоп"))
-        self.pushButtonEdit.setText(_translate("MainWindow", "Настройки"))
+        # self.pushButtonEdit.setText(_translate("MainWindow", "Настройки"))
     def on_click_button_run(self):
         print("Мы нажали кнопку")
         if self.radioButton_parsing.isChecked():
@@ -140,5 +142,9 @@ class Ui_MainWindow(object):
             self.textEdit.append('Парсинг телефонов участников')
             self.pushButton_run.setEnabled(False)
 
+        elif self.radioButton_10_get_phone.isChecked():
+            self.obj_tsm.func_9_check_phone()
+            self.textEdit.append('Геолокация')
+            self.pushButton_run.setEnabled(False)
     def on_click_button_stop(self):
         print("Мы нажали стоп")

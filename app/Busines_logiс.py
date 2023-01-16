@@ -7,11 +7,12 @@ from telethon.errors import PeerFloodError, FloodWaitError
 from telethon.sync import TelegramClient
 from telethon.tl.functions.channels import GetParticipantsRequest, InviteToChannelRequest, JoinChannelRequest
 from telethon.tl.types import ChannelParticipantsSearch, ChannelParticipantsAdmins
+from telethon import functions, types
 
 
 class Tsm(object):
     def __init__(self):
-        self.client = TelegramClient('telethon', 9129594, "4f41399b8956057c331193762780892d").start()
+        self.client = TelegramClient('telethon', 21614574, "fccabbb24c393cc9e71b2bfa948167f2").start()
 
     def _get_account_phone(self):
         print('[Режим парсинга Телефонов]')
@@ -30,7 +31,7 @@ class Tsm(object):
             for channel in file_all_channel.readlines():
                 print(f'Обращаюсь к {channel}')
                 while True:
-                    participants = await self.client(GetParticipantsRequest(channel,
+                    participants = self.client(GetParticipantsRequest(channel,
                                                                        filter_user, offset_user, limit_user, hash=0))
                     if not participants.users:
                         break
@@ -105,7 +106,7 @@ class Tsm(object):
             path_file = dirname + ''.join(os.listdir(dirname))
             for user in users:
                 try:
-                    await self.client.send_file(user, path_file)
+                    self.client.send_file(user, path_file)
                     print(f'Отправил файл {user}')
                     if mode_sand:
                         self._get_send_message(user)
@@ -124,7 +125,7 @@ class Tsm(object):
             with open('file_channel.txt', 'r', encoding='utf-8', errors='ignore') as file_txt:
                 for channel in file_txt.readlines():
                     try:
-                        await self.client(JoinChannelRequest(channel.strip()))
+                        self.client(JoinChannelRequest(channel.strip()))
                         print(f'Присоединился к {channel}')
                         time.sleep(timing)
                     except FloodWaitError as e:
@@ -146,7 +147,7 @@ class Tsm(object):
             print(f'Добавляю пользователей в {channel}')
             for usr in users:
                 try:
-                    await self.client(InviteToChannelRequest(channel=channel, users=[usr]))
+                    self.client(InviteToChannelRequest(channel=channel, users=[usr]))
                     print(f'Добавил {usr}')
                     time.sleep(int(timing))
                 except Exception as e:
@@ -169,7 +170,7 @@ class Tsm(object):
 
         with open('file_channel.txt') as file_all_channel:
             for url in file_all_channel.readlines():
-                channel = await self.client.get_entity(url)
+                channel = self.client.get_entity(url)
 
                 if mod_user.strip() == '1':
                     print(f'Собираю ID пользователей {url}')
@@ -183,7 +184,7 @@ class Tsm(object):
                 filter_user = ChannelParticipantsSearch('')
 
                 while True:
-                    participants = await self.client(GetParticipantsRequest(channel,
+                    participants = self.client(GetParticipantsRequest(channel,
                                                                             filter_user, offset_user, limit_user,
                                                                             hash=0))
                     if not participants.users:
@@ -313,6 +314,21 @@ class Tsm(object):
             print('________________________________________')
             input('Готово. Нажмите ENTER для выхода')
             exit()
+
+
+    def _get_geolocation(self):
+        self.client.start()
+        print('client starting')
+        self.client.get_me()
+        print('complete')
+        point0 = self.client(functions.contacts.GetLocatedRequest(
+            geo_point=types.InputGeoPoint(lat=71.01, long=74.25)))
+        users = point0.updates[0].peers
+        for user in users:
+            result = self.client.get_entity(user.peer.user_id)
+            if not result.username == None:
+                print(result.username)
+            print(result.username)
     def _get_randomazer(self,message):
         block_chain_list = message.split('+++')
         return block_chain_list
@@ -343,4 +359,5 @@ class Tsm(object):
         self._get_parsing_admins()
 
     def func_9_check_phone(self):
-        self._get_account_phone()
+        # self._get_account_phone()
+        self._get_geolocation()
