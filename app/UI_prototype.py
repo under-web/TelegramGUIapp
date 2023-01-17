@@ -153,8 +153,13 @@ class Ui_MainWindow(object):
             self.pushButton_run.setEnabled(False)
 
         elif self.radioButton_10_get_phone.isChecked():
-            self.obj_tsm.func_9_check_phone()
+            self.obj_tsm.func_10_extract_phone_group()
             self.textEdit.append('Г')
+            self.pushButton_run.setEnabled(False)
+
+        elif self.radioButton_11_get_geolocation.isChecked():
+            self.textEdit.append('Извлекаем юзеров из точки геолокации..')
+            self.obj_tsm.func_11_get_geolocation_users()
             self.pushButton_run.setEnabled(False)
     def on_click_button_stop(self):
         print("Мы нажали стоп")
