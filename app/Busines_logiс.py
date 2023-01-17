@@ -366,6 +366,6 @@ class Tsm(object):
     def func_11_get_geolocation_users(self):
         self._get_geolocation()
 
-print('В модуле')
-tsm = Tsm()
-tsm.func_11_get_geolocation_users()
+# print('В модуле')
+# tsm = Tsm()
+# tsm.func_11_get_geolocation_users()

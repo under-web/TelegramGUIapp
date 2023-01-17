@@ -41,14 +41,25 @@ class Ui_MainWindow(object):
         self.radioButton_8_parsing_admin.setGeometry(QtCore.QRect(50, 340, 501, 17))
         self.radioButton_8_parsing_admin.setObjectName("radioButton_8_parsing_admin")
         self.radioButton_9_chek_phone = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_9_chek_phone.setGeometry(QtCore.QRect(50, 400, 501, 17))
+        self.radioButton_9_chek_phone.setGeometry(QtCore.QRect(50, 370, 501, 17))
         self.radioButton_9_chek_phone.setObjectName("radioButton_9_chek_phone")
         self.radioButton_10_get_phone = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_10_get_phone.setGeometry(QtCore.QRect(50, 370, 501, 17))
+        self.radioButton_10_get_phone.setGeometry(QtCore.QRect(50, 400, 501, 17))
         self.radioButton_10_get_phone.setObjectName("radioButton_10_get_phone")
+
+        self.radioButton_11_get_geolocation = QtWidgets.QRadioButton(self.centralwidget)
+        self.radioButton_11_get_geolocation.setGeometry(QtCore.QRect(50, 430, 501, 17))
+        self.radioButton_11_get_geolocation.setObjectName("radioButton_11_get_geolocation")
+
+
         self.pushButton_run = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_run.setGeometry(QtCore.QRect(720, 520, 75, 51))
+        self.pushButton_run.setGeometry(QtCore.QRect(720, 480, 75, 51)) # кнопка старт
         self.pushButton_run.setObjectName("pushButton_run")
+
+        self.pushButton_stop = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_stop.setGeometry(QtCore.QRect(720, 580, 75, 51)) # кнопка стоп
+        self.pushButton_stop.setObjectName("pushButton_stop")
+
         self.label_telegram_combain = QtWidgets.QLabel(self.centralwidget)
         self.label_telegram_combain.setGeometry(QtCore.QRect(50, 70, 521, 51))
         font = QtGui.QFont()
@@ -89,6 +100,7 @@ class Ui_MainWindow(object):
         self.radioButton_8_parsing_admin.setText(_translate("MainWindow", "[8] Извлечь Администраторов группы (из file_channel --> all_user.txt)."))
         self.radioButton_9_chek_phone.setText(_translate("MainWindow", "[9] Чекер номеров телефонов на наличие аккаунта телеграм (из phones.txt --> all_user.txt)."))
         self.radioButton_10_get_phone.setText(_translate("MainWindow", "[10] Извлечь номера телефонов участников групп (из file_channel --> all_user.txt).\'"))
+        self.radioButton_11_get_geolocation.setText(_translate("MainWindow", "[11] Поиск аудитории по геопозиции"))
         self.pushButton_run.setText(_translate("MainWindow", "Пуск"))
         self.label_telegram_combain.setText(_translate("MainWindow", "TelegramCombain"))
         self.pushButton_stop.setText(_translate("MainWindow", "Стоп"))
