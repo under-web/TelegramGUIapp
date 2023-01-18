@@ -8,7 +8,7 @@ from telethon.sync import TelegramClient
 from telethon.tl.functions.channels import GetParticipantsRequest, InviteToChannelRequest, JoinChannelRequest
 from telethon.tl.types import ChannelParticipantsSearch, ChannelParticipantsAdmins
 from telethon import functions, types
-
+from openpyxl import load_workbook
 
 class Tsm(object):
     def __init__(self):
@@ -317,18 +317,47 @@ class Tsm(object):
 
 
     def _get_geolocation(self):
+        while True:
+            try:
+                latitude = input('Введите долготу (longitude): ')
+                longitude = input('Введите широту (latitude): ')
+                if latitude or longitude == '':
+                    latitude = 54.32
+                    longitude = 52.47
+                    break
+                else:
+                    latitude = float(latitude.replace(',', '.'))
+                    longitude = float(longitude.replace(',', '.'))
+                break
+            except Exception as err:
+                print('Введите корректное значение!')
+                print(err)
+        fn = 'example.xlsx'
+        wb = load_workbook(fn)
+        ws = wb['data']
         self.client.start()
         print('client starting')
         self.client.get_me()
-        print('complete')
-        point0 = self.client(functions.contacts.GetLocatedRequest(
-            geo_point=types.InputGeoPoint(lat=71.01, long=74.25)))
-        users = point0.updates[0].peers
-        for user in users:
-            result = self.client.get_entity(user.peer.user_id)
-            if not result.username == None:
-                print(result.username)
-            print(result.username)
+        try:
+            point0 = self.client(functions.contacts.GetLocatedRequest(
+                geo_point=types.InputGeoPoint(lat=latitude, long=longitude)))
+            users = point0.updates[0].peers
+            for user in users:
+                try:
+                    result = self.client.get_entity(user.peer.user_id)
+                    # print(result)
+                    if not result.username == None:
+                        print(result.username)
+                    print(result.id, result.phone, result.username, result.first_name, result.last_name)
+                    ws.append([result.id, result.phone, result.username, result.first_name, result.last_name])
+                    wb.save(fn)
+                    wb.close()
+                except Exception as e:
+                    print(e)
+                    continue
+        except Exception as er:
+            print('geo:', er)
+        return True
     def _get_randomazer(self,message):
         block_chain_list = message.split('+++')
         return block_chain_list
